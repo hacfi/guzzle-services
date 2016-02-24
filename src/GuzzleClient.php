@@ -45,7 +45,13 @@ class GuzzleClient extends ServiceClient
             ? $config['serializer']
             : new Serializer($this->description);
 
-        parent::__construct($client, $serializer, function(){}); // @todo responseToResult
+        parent::__construct(
+            $client,
+            $serializer,
+            function ($response, $request) {
+                return $response; // @todo responseToResult
+            }
+        );
 //        $this->processConfig($config); // @todo config?
     }
 
